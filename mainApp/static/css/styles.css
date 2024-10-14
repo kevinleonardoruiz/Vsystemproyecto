@@ -8,14 +8,14 @@
 }
 
 body{
-    background-color: #f2f2f2;
+    background-color: #f2f2f200;
 }
 
 
 header {
     width: 1212px;
     height: 140px;
-    background-color: rgb(0, 183, 255); /* Cambiado a azul */
+    background-color: rgb(0, 255, 68); /* Cambiado a azul */
     margin: 0 auto;
 }
 
@@ -24,10 +24,11 @@ nav {
     width: 1211px;
     height: 40px;
     margin: 0 auto;
-    background-color: green; /* Cambiado a verde */
-    border: 1px solid #090249;
+    background-color: rgb(85, 93, 233); /* Cambiado a verde */
+    border: 1px solid #49020d;
     font-size: 15px;    
 }
+
 
 
 .clearfix{
@@ -255,9 +256,10 @@ footer{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 80vh; /* Centrado verticalmente */
-    font-size: 5em; /* Aumenta el tamaño del texto */
+    height: 80vh; 
+    font-size: 5em; 
     font-weight: bold;
     color: #333;
-    text-align: center; /* Asegura que el texto esté centrado en líneas múltiples */
+    text-align: center; 
 }
+

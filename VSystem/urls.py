@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from mainApp.views import inicio
-from persona.views import get_estudiantes, formulario_estudiante,eliminar_estudiante
+from persona.views import get_estudiantes, formulario_estudiante,eliminar_estudiante,get_profesores,formulario_profesor,eliminar_profesor
 from curso.views import get_curso, formulario,eliminar_curso
 from estudiante_curso.views import Estudiante_Curso, formulario_estudiante_curso,eliminar_estudiante_curso
 from matricula.views import lista_matriculas, formulario_matricula,eliminar_matricula
@@ -35,10 +35,12 @@ urlpatterns = [
     path('estudiantes-curso/agregar/', formulario_estudiante_curso, name='formulario_estudiante_curso'),
     path('matriculas/', lista_matriculas, name='lista-matriculas'), 
     path('matriculas/nueva/', formulario_matricula, name='formulario_matricula'),  
-    path('eliminar-estudiante/<str:dni>/', eliminar_estudiante, name='eliminar-estudiante'),  # Ruta para eliminar estudiante
+    path('eliminar-estudiante/<str:dni>/', eliminar_estudiante, name='eliminar-estudiante'),  
     path('eliminar-estudiante-curso/<int:id>/', eliminar_estudiante_curso, name='eliminar-estudiante-curso'),
-    path('eliminar-matricula/<int:id>/', eliminar_matricula, name='eliminar-matricula'),  # Ruta para eliminar matrícula
+    path('eliminar-matricula/<int:id>/', eliminar_matricula, name='eliminar-matricula'),  
     path('eliminar-curso/<int:id>', eliminar_curso, name='eliminar_curso'),
-
+    path('profesores/nuevo/', formulario_profesor, name='formulario_profesor'),
+    path('profesores/eliminar/<int:profesor_id>/', eliminar_profesor, name='eliminar_profesor'),
+    path('profesores/', get_profesores, name='lista-profesores'),
 
 ]

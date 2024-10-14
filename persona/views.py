@@ -11,15 +11,14 @@ def get_estudiantes(request):
         'estudiantes': estudiantes
     })
 
-# Vista para agregar nuevos estudiantes
 def formulario_estudiante(request):
     if request.method == 'POST':
         form = PersonaForm(request.POST)
         if form.is_valid():
-            estudiante = form.save(commit=False)  # No guardar aún en la base de datos
-            estudiante.rol = 'Estudiante'  # Asignar el rol predeterminado
-            estudiante.save()  # Ahora guarda el estudiante
-            return redirect('lista-estudiantes')  # Redirige a la lista de estudiantes después de guardar
+            estudiante = form.save(commit=False) 
+            estudiante.rol = 'Estudiante'  
+            estudiante.save()  
+            return redirect('lista-estudiantes')  
     else:
         form = PersonaForm()
 
@@ -29,3 +28,27 @@ def eliminar_estudiante(request, dni):
     estudiante = get_object_or_404(Persona, dni=dni)
     estudiante.delete()
     return redirect('lista-estudiantes')
+
+def eliminar_profesor(request, profesor_id):
+    profesor_instance = get_object_or_404(Persona, id=profesor_id)
+    profesor_instance.delete()
+    return redirect('lista-profesores')
+
+def formulario_profesor(request):
+    if request.method == 'POST':
+        form = PersonaForm(request.POST)
+        if form.is_valid():
+            profesor = form.save(commit=False)
+            profesor.rol = 'Profesor'  # Asignar el rol predeterminado
+            profesor.save()  # Guardar el nuevo profesor
+            return redirect('lista-profesores')  # Redirigir a la lista de profesores
+    else:
+        form = PersonaForm()
+
+    return render(request, 'formulario_profesor.html', {'form': form})
+def get_profesores(request):
+    profesores = Persona.objects.filter(rol='Profesor')
+    return render(request, 'lista-profesores.html', {
+        'title': 'Lista de profesores',
+        'profesores': profesores
+    })

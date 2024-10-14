@@ -1,0 +1,76 @@
+{% extends "index.html" %}
+{% block content %}
+<!-- Incluye el CSS de DataTables -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+
+<!-- Incluye jQuery y el JS de DataTables -->
+<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+
+
+
+    <h1>{{ title }}</h1>
+
+    <!-- Tabla de Profesores -->
+    <table id="tablaProfesores" class="table table-dark table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellidos</th>
+                <th scope="col">DNI</th>
+                <th scope="col">Rol</th>
+                <th scope="col">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for profesor in profesores %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ profesor.nombre }}</td>
+                <td>{{ profesor.apellidos }}</td>
+                <td>{{ profesor.dni }}</td>
+                <td>{{ profesor.rol }}</td>
+                <td>
+                    <a href="{% url 'eliminar_profesor' profesor.id %}" class="btn btn-danger" onclick="return confirmarEliminacion();">Eliminar</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6" class="text-center">No hay profesores registrados.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{% url 'formulario_profesor' %}" class="btn btn-primary">Agregar nuevo profesor</a>
+
+    <!-- Script para inicializar DataTables -->
+    <script>
+        $(document).ready(function() {
+            $('#tablaProfesores').DataTable({
+                paging: true,
+                ordering: true,
+                info: true,
+                search: true,
+                language: {
+                    search: "Buscar:",
+                    lengthMenu: "Mostrar _MENU_ registros",
+                    info: "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                    infoEmpty: "No se encontraron registros",
+                    paginate: {
+                        first: "Primero",
+                        last: "Último",
+                        next: "Siguiente",
+                        previous: "Anterior"
+                    }
+                }
+            });
+        });
+
+        function confirmarEliminacion() {
+            return confirm('¿Estás seguro de que deseas eliminar este profesor? Esta acción no se puede deshacer.');
+        }
+    </script>
+
+{% endblock %}
