@@ -4,7 +4,6 @@ from .forms import CursoForm
 from django.shortcuts import render, get_object_or_404, redirect
 
 
-# Vista para listar los cursos
 def get_curso(request):
     cursos = curso.objects.all()
     return render(request, 'lista_cursos.html', {
@@ -12,13 +11,12 @@ def get_curso(request):
         'cursos': cursos,
     })
 
-# Vista para agregar o editar cursos
 def formulario(request):
     if request.method == 'POST':
         form = CursoForm(request.POST)
         if form.is_valid():
-            form.save()  # Guarda el nuevo curso
-            return redirect('lista-cursos')  # Redirige a la página de lista de cursos después de guardar
+            form.save()  
+            return redirect('lista-cursos')  
     else:
         form = CursoForm()
 

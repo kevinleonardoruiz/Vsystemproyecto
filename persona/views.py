@@ -3,7 +3,6 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Persona
 from .forms import PersonaForm
 
-# Vista para listar estudiantes
 def get_estudiantes(request):
     estudiantes = Persona.objects.filter(rol='Estudiante')
     return render(request, 'lista-estudiantes.html', {
@@ -39,9 +38,9 @@ def formulario_profesor(request):
         form = PersonaForm(request.POST)
         if form.is_valid():
             profesor = form.save(commit=False)
-            profesor.rol = 'Profesor'  # Asignar el rol predeterminado
-            profesor.save()  # Guardar el nuevo profesor
-            return redirect('lista-profesores')  # Redirigir a la lista de profesores
+            profesor.rol = 'Profesor' 
+            profesor.save()  
+            return redirect('lista-profesores')  
     else:
         form = PersonaForm()
 

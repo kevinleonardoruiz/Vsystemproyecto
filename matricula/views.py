@@ -3,22 +3,22 @@ from .models import Matricula
 from .forms import MatriculaForm  
 from django.shortcuts import render, get_object_or_404, redirect
 
-from curso.models import curso  # Importar el modelo Curso para mostrar la lista de cursos
+from curso.models import curso  
 
 def lista_matriculas(request):
-    cursos = curso.objects.all()  # Obtener todos los cursos disponibles
-    curso_seleccionado = request.GET.get('curso')  # Obtener el curso seleccionado del filtro
+    cursos = curso.objects.all() 
+    curso_seleccionado = request.GET.get('curso')  
 
     if curso_seleccionado:
-        matriculas = Matricula.objects.filter(estudiante_curso__curso=curso_seleccionado)  # Filtrar por curso seleccionado
+        matriculas = Matricula.objects.filter(estudiante_curso__curso=curso_seleccionado)  
     else:
-        matriculas = Matricula.objects.all()  # Mostrar todas las matrículas si no se selecciona un curso
+        matriculas = Matricula.objects.all()  
 
     return render(request, 'lista_matricula.html', {
         'title': 'Lista de matrículas',
         'matriculas': matriculas,
-        'cursos': cursos,  # Pasar los cursos a la plantilla
-        'curso_seleccionado': curso_seleccionado  # Pasar el curso seleccionado a la plantilla
+        'cursos': cursos,  
+        'curso_seleccionado': curso_seleccionado
     })
 
 def formulario_matricula(request):
